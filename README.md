@@ -17,4 +17,4 @@ Once completed, the dummy web app can be tested by calling the load balancer url
 
 ## Challenges
 
-Installing apache via apt-get did not work as expected. I have to install httpd via yum in order to create a webserver
+Installing apache via apt-get did not work as expected. I had to [install httpd](https://docs.oracle.com/en/operating-systems/oracle-linux/6/admin/install-apache.html) via yum in order to create a webserver
