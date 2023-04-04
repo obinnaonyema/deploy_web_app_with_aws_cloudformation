@@ -14,12 +14,12 @@ jobs:
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
-      run:
-        - command: return 1
+      - run:
+        command: return 1
 
-      run: 
-        - command: echo "Hello Error!"
-        - when: on_fail
+      - run: 
+        command: echo "Hello Error!"
+        when: on_fail
 
  
       
