@@ -23,7 +23,7 @@ jobs:
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - printid:
-        id: << pipeline.id >>
+          id: << pipeline.id >>
 
  
       
