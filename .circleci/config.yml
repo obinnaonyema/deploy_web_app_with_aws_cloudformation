@@ -2,10 +2,21 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
+command: 
+  printid:
+    description: "print workflow ID"
+    parameters: 
+      to:
+        type: string
+        default: $CIRCLE_WORKFLOW_ID
+    steps:
+      - run: echo << parameters.to >>
+      
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  save_hello_world_output:
+  print_pipeline_id:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
@@ -13,25 +24,9 @@ jobs:
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
-      - checkout
-      - run:
-          name: "output text to file"
-          command: echo "hello world" > ~/output.txt
-      - persist_to_workspace:
-          root: ~/
-          paths: 
-            - output.txt
+      - printid
 
-  print_output_file:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - checkout
-      - attach_workspace: 
-          at: ~/
-      - run:
-          name: "print output file"
-          command: cat ~/output.txt
+ 
       
         
 
@@ -43,8 +38,6 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
-      - save_hello_world_output
-      - print_output_file:
-          requires:
-            - save_hello_world_output
+      - print_pipeline_id
+
           
