@@ -45,7 +45,7 @@ workflows:
       - say-kedu:
           requires:
             - say-hello
-      - display-name
+      - display-name:
           requires:
             - say-kedu
           
