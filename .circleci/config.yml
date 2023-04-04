@@ -2,10 +2,6 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
-orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
-
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
@@ -31,6 +27,15 @@ jobs:
           name: "Uwa kedu"          
           command: "echo Uwa, Kedu!"
 
+  display-name:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: "print my name from env var"
+          command: echo $MY_NAME
+
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
@@ -40,3 +45,7 @@ workflows:
       - say-kedu:
           requires:
             - say-hello
+      - display-name
+          requires:
+            - say-kedu
+          
